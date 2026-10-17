@@ -1,0 +1,12 @@
+    ll n;
+    cin >> n;
+    vl a(n),b(n),vals(n);
+    cin >> a;
+    vals = a;
+    sort(nall(vals));
+    //重複要素を削除
+    vc_unique(vals);
+    rep(i,n){
+        b[i] = (lower_bound(vals.begin(), vals.end(), a[i])-vals.begin()) + 1;
+    }
+    cout << b << endl;

@@ -1,0 +1,10 @@
+// 前提: 配列 v は昇順ソート済みであること (sort(nall(v));)
+//計算量はすべてlog N
+lower_bound(nall(v), X) - v.begin(); // X 未満の個数 ( < X )
+upper_bound(nall(v), X) - v.begin(); // X 以下の個数 ( <= X )
+upper_bound(nall(v), X) - lower_bound(nall(v), X); // X と等しい個数 ( == X )
+v.end() - upper_bound(nall(v), X);   // X より大きい個数 ( > X )
+v.end() - lower_bound(nall(v), X);   // X 以上の個数 ( >= X )
+
+// 存在判定のみ（bool値を返す）
+binary_search(nall(v), X);

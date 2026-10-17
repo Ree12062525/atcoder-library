@@ -1,0 +1,56 @@
+//2次元の累積和
+ //累積和
+    ll h = 100;
+    ll w = 100; //配列サイズ
+    //indexを1から始める。0から入力される場合は+1(0から始めるとrrepが通らない)
+    vvl v(h + 2, vl(w + 2, 0));
+    vvl sum(h + 2, vl(w + 2, 0));
+
+    rrep(i,h)rrep(j,w) sum[i][j] = sum[i][j-1] + v[i][j];
+    rrep(i,h)rrep(j,w) sum[i][j] = sum[i-1][j] + sum[i][j];
+    
+    //クエリ処理
+    cin >> q;
+    rrep(i,q){
+        cin >> x1 >> y1 >> x2 >> y2;
+        //入力が 0-indexed (0 <= x < h) の場合は下記を有効化(マス目の問題の場合)
+        //x1++; y1++; x2++; y2++;
+        cout << sum[x2][y2] - sum[x1-1][y2] - sum[x2][y1-1] + sum[x1-1][y1-1] << endl;
+    }
+
+
+//いもす法
+//+1から-1までの範囲を縦と横で累積和をとる。
+    ll h,w,n;
+    cin >> h >> w >> n;
+    vvl v(h + 2, vl(w + 2, 0));
+    vvl sum(h + 2, vl(w + 2, 0));
+    //入力
+    ll x1,x2,y1,y2;
+    rrep(i,n){
+    cin >> x1 >> y1 >> x2 >> y2;
+    //入力が 0-indexed (0 <= x < h) の場合は下記を有効化(マス目の問題の場合)
+    // x1++; y1++; x2++; y2++;
+    
+    //マス目の場合の例
+    //v[x1][y1]++;
+    //v[x2+1][y1]--;
+    //v[x1][y2+1]--;
+    //v[x2+1][y2+1]++;
+
+    //座標
+    //v[x1][y1]++;
+    //v[x2][y1]--;
+    //v[x1][y2]--;
+    //v[x2][y2]++;
+    }
+    //累積和
+    rrep(i,h)rrep(j,w) sum[i][j] = sum[i][j-1] + v[i][j];
+    rrep(i,h)rrep(j,w) sum[i][j] = sum[i-1][j] + sum[i][j];
+    rrep(i,h){
+        rrep(j,w){
+        cout << sum[i][j];
+        if(j!=w) cout << ' ';
+        }
+        cout << endl;
+    }

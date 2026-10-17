@@ -1,0 +1,23 @@
+// 二分探索 (0-indexed)
+ll search_0index(const vl& v, ll n, ll key) {
+    ll left = 0, right = n - 1;
+    while (left <= right) {
+        ll mid = left + (right - left) / 2;
+        if (v[mid] == key) return mid; // 発見した位置 (0 〜 n-1)
+        if (v[mid] < key) left = mid + 1;
+        if (v[mid] > key) right = mid - 1;
+    }
+    return -1; // 存在しない
+}
+
+// 二分探索 (1-indexed)
+ll search_0index(const vl& v, ll n, ll key) {
+    ll left = 1, right = n;
+    while (left <= right) {
+        ll mid = left + (right - left) / 2;
+        if (v[mid] == key) return mid; // 発見した位置 (0 〜 n-1)
+        if (v[mid] < key) left = mid + 1;
+        if (v[mid] > key) right = mid - 1;
+    }
+    return -1; // 存在しない
+}

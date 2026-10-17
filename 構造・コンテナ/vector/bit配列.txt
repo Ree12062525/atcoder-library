@@ -1,0 +1,15 @@
+//ある区間(l~r)に1があるかどうかを判定する
+
+//0-index
+vl bit(n),sum(n);
+rep(i,n){   //累積和をとる (sum[i+1] は bit[0] ~ bit[i] の和)
+    if(i == 0){
+        sum[i] = bit[i];
+        continue;
+    }
+    sum[i] = sum[i-1] + bit[i];
+}
+
+//判定 (区間 [l, r] の和は sum[r + 1] - sum[l])
+if(sum[r] - (l > 0 ? sum[l-1] : 0) > 0) cout << "Yes" << endl;
+else cout << "No" << endl;

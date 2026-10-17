@@ -1,0 +1,8 @@
+//nをketa桁の2進数に変換して出力するプログラム
+ll n,keta=10;
+cin >> n;
+dfor(i,keta,0){
+    ll wari = (1<<i);  //i回左シフト
+    cout << (n/wari)%2;
+    }
+cout << endl;

@@ -1,0 +1,34 @@
+長さnの数列の部分列(ある区間)を求めるときに使用
+
+使用例
+    // 尺取法(半開区間)
+    ll right = 0, ans = 0;
+    // 区間 [left, right) の状態を保持する変数（和、種類数、積など）
+    ll state = 0; 
+
+    //stateはリセットしない
+    rep(left, n) {
+        // right を進められるだけ進める
+        while (right < n && /* right を追加しても条件を満たすか判定 */) {
+            /* state に v[right] を加える処理 */
+            state += v[right];
+            right++;
+        }
+
+        // --- ここで [left, right) は left を左端とする条件を満たす最大区間 ---
+    
+        // 【用途1】条件を満たす最長区間の更新
+        chmax(ans, right - left);
+    
+        // 【用途2】条件を満たす区間数のカウント (v[i] >= 0 などの単調性がある場合)
+        // ans += (right - left);
+
+        // left を 1 つ進める準備（区間から v[left] を除外）
+        if (left == right) {
+            // left が right に追いついた場合（区間長 0）
+            right++;
+        } else {
+            /* state から v[left] を除く処理 */
+            state -= v[left];
+        }
+    }

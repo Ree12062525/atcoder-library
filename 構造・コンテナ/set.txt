@@ -1,0 +1,19 @@
+//set
+//要素を自動的に昇順で整列する構造
+set<ll> st;
+//降順
+set<ll,greater<ll>> st
+//要素の追加
+st.insert(n);   //nを追加
+// 最小値・最大値
+min = *st.begin();
+max = *st.rbegin();
+//削除
+st.erase(n);    //nをすべて削除
+
+//multiset(要素の重複を可能にしたset)
+multiset<ll> mst;
+//追加、最小値、最大値はsetと同じ
+//削除
+st.erase(n);    //nをすべて削除
+st.erase(st.find(n));    //nを一つだけ

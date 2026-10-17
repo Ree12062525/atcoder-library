@@ -1,0 +1,10 @@
+ペア
+pair<ll,ll> p;
+(ll型なら　P p  で宣言可能)
+
+ペア型配列
+vector<vector<P>> vp(n);
+//配列の内容をすべて取り出しながら繰り返す
+rep(i,n) for(auto [a,b] : vp[i]){    //vpの内容をすべて順番に取り出す
+        //aやbを用いた処理
+        }
