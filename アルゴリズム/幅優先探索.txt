@@ -7,11 +7,11 @@
 ll n, m;
 cin >> n >> m;
 vvl to(n);
-rep(i, m) {
+rep(i, m) {     //ノードaとノードbが隣接しているということ.
     ll a, b;
     cin >> a >> b;
     // 入力が 1-indexed の場合は 1 を引く
-    --a; --b;
+    // --a; --b;
     to[a].pb(b);
     to[b].pb(a);
 }
@@ -19,7 +19,8 @@ rep(i, m) {
 // 始点 s から各頂点への最短距離
 ll s = 0;
 vl dist(n, -1); // -1 は未到達を表す
-vl prev(n, -1); // prev[v] は最短経路上で v の直前に通る頂点
+// prev[v] は最短経路上で v の直前に通る頂点
+// vl prev(n, -1);
 queue<ll> que;
 dist[s] = 0;
 que.push(s);
@@ -31,7 +32,8 @@ while (!que.empty()) {
     for (ll nv : to[v]) {
         if (dist[nv] != -1) continue; // 訪問済み
         dist[nv] = dist[v] + 1;
-        prev[nv] = v; // 最短経路を復元するために直前の頂点を保存
+        // 最短経路を復元するために直前の頂点を保存
+        // prev[nv] = v;
         que.push(nv);
     }
 }
