@@ -1,0 +1,94 @@
+// 幅優先探索（BFS）
+// 辺の重みがすべて 1 のグラフで、始点から各頂点への最短距離を求める。
+// 計算量: O(N + M)（N は頂点数、M は辺数）
+// 頂点番号は 0-indexed とする。
+
+// 無向グラフの入力例
+ll n, m;
+cin >> n >> m;
+vvl to(n);
+rep(i, m) {
+    ll a, b;
+    cin >> a >> b;
+    // 入力が 1-indexed の場合は 1 を引く
+    --a; --b;
+    to[a].pb(b);
+    to[b].pb(a);
+}
+
+// 始点 s から各頂点への最短距離
+ll s = 0;
+vl dist(n, -1); // -1 は未到達を表す
+vl prev(n, -1); // prev[v] は最短経路上で v の直前に通る頂点
+queue<ll> que;
+dist[s] = 0;
+que.push(s);
+
+while (!que.empty()) {
+    ll v = que.front();
+    que.pop();
+
+    for (ll nv : to[v]) {
+        if (dist[nv] != -1) continue; // 訪問済み
+        dist[nv] = dist[v] + 1;
+        prev[nv] = v; // 最短経路を復元するために直前の頂点を保存
+        que.push(nv);
+    }
+}
+
+// dist[v] が始点 s から頂点 v までの最短距離。
+// 到達できない頂点は dist[v] == -1。
+
+// 頂点 t までの最短経路を復元する場合（到達可能なときに使用）
+// ll t = n - 1;
+// vl path;
+// for (ll v = t; v != -1; v = prev[v]) path.pb(v);
+// reverse(path.begin(), path.end()); // path は s から t の順になる
+
+
+// グリッド上の BFS の例
+// '.' を通行可能、'#' を通行不可とする。
+ll h, w;
+cin >> h >> w;
+vs grid(h);
+cin >> grid;
+ll sy, sx; // 始点の行・列 (0-indexed)
+cin >> sy >> sx;
+vvl grid_dist(h, vl(w, -1));
+vvl grid_prev_y(h, vl(w, -1)); // 最短経路上で直前に通るマスの行
+vvl grid_prev_x(h, vl(w, -1)); // 最短経路上で直前に通るマスの列
+queue<P> que_grid;
+grid_dist[sy][sx] = 0;
+que_grid.push({sy, sx});
+
+while (!que_grid.empty()) {
+    auto [y, x] = que_grid.front();
+    que_grid.pop();
+
+    rep(d, 4) {
+        ll ny = y + dy[d], nx = x + dx[d];
+        if (out_grid(ny, nx, h, w)) continue;
+        if (grid[ny][nx] == '#') continue;
+        if (grid_dist[ny][nx] != -1) continue;
+        grid_dist[ny][nx] = grid_dist[y][x] + 1;
+        grid_prev_y[ny][nx] = y; // 直前のマスを保存
+        grid_prev_x[ny][nx] = x;
+        que_grid.push({ny, nx});
+    }
+}
+
+// grid_dist[y][x] が始点からの最短距離。
+// グリッドの入力形式や始点の位置は問題に合わせて変更する。
+
+// グリッド上でゴール (gy, gx) までの最短経路を復元する場合
+// (gy, gx) に到達できるときに使用する。
+// ll gy = h - 1, gx = w - 1;
+// vc<P> grid_path;
+// ll y = gy, x = gx;
+// while (y != sy || x != sx) {
+//     grid_path.pb({y, x});
+//     ll py = grid_prev_y[y][x], px = grid_prev_x[y][x];
+//     y = py; x = px;
+// }
+// grid_path.pb({sy, sx});
+// reverse(grid_path.begin(), grid_path.end()); // 始点からゴールの順になる
